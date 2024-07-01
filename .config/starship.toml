@@ -1,0 +1,69 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+palette = "colors"
+format = """
+[╭─](bold white)$username\
+$hostname\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$package\
+$dart\
+$dotnet\
+$elixir\
+$kotlin\
+$swift\
+$env_var\
+$custom\
+$sudo\
+$line_break\
+[╰─](bold white)$jobs\
+$battery\
+$time\
+$status\
+$shell\
+$character"""
+
+[palettes.colors]
+orange = "#ffb650"
+
+[character]
+success_symbol = "[❯](bold green)" 
+error_symbol = "[❯](bold red)"
+
+[package]
+disabled = true
+
+[line_break]
+disabled = false
+
+[dart]
+format = "[$symbol($version)]($style)"
+disabled = false
+
+[dotnet]
+format = "[$symbol ($tfm)]($style)"
+symbol = "🎯"
+
+[directory]
+truncation_length = 3
+style = "bold white"
+truncation_symbol = "…/"
+use_os_path_sep = false
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+symbol = "🌱 "
+style = "orange"
+
+[git_status]
+staged = '[++$count](green)'
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+style = "orange"
