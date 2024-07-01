@@ -1,3 +1,8 @@
+# For MacOS, will made any homebrew installed apps available on the path
+if [ -d "opt/homebrew/bin/" ]; then
+	eval "$(opt/homebrew/bin/brew shellenv)"
+fi
+
 # Change cursor style to be a line blinking
 echo '\e[5 q'
 
