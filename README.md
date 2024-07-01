@@ -20,6 +20,7 @@ stow .
 
 Now, get back to your home folder and set your terminal to use zsh as its default shell
 ```shell
+cd ..
 chsh -s $(which zsh)
 source .zshrc
 ```
