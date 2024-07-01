@@ -1,9 +1,6 @@
 # Change cursor style to be a line blinking
 echo '\e[5 q'
 
-# Path to your oh-my-zsh installation.
-#export ZSH="/Users/alba/.oh-my-zsh"
-
 # Set the directory to store zinit and its plugins
 # The first part of this command set to use the XDG_DATA_HOME path, and if it doesn't exists(or it's null),
 # then it will use the .local/share path - This is called Parameter Expansion
@@ -66,8 +63,8 @@ export LANG=en_US.UTF-8
 # Aliases
 alias ls="ls -lah --color"
 alias cls="clear"
-#alias lg="log -10 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-#alias fetchall="branch -r | grep -v '\->' | sed \"s,\x1B\[[0-9;]*[a-zA-Z],,g\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done"
+alias glg="git log -10 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias fetchall="git branch -r | grep -v '\->' | sed \"s,\x1B\[[0-9;]*[a-zA-Z],,g\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done"
 #alias clear-flutter-projects="sh /Users/alba/dev/bioma/flutter-clean-recursivo.sh"
 
 # Path Exports
@@ -90,4 +87,4 @@ export PAGER="less -F"
 
 
 # Shell integrations
-eval "$(fzf --zsh)"
+# eval "$(fzf --zsh)" # Waiting for support of version 0.48.1 for Ubuntu
