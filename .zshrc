@@ -94,6 +94,11 @@ export PAGER="less -F"
 # Shell integrations
 # eval "$(fzf --zsh)" # Waiting for support of version 0.48.1 for Ubuntu
 
+## Homebrew on Linux
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Custom dircolors setup, for the reason that in WSL all folders being listed by ls command that are inside
 # of a windows mounted drive, display a blue text with a green background, wich is awful to read
 eval "$(dircolors -b ~/.config/dircolors)"
