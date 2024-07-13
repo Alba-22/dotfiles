@@ -93,3 +93,7 @@ export PAGER="less -F"
 
 # Shell integrations
 # eval "$(fzf --zsh)" # Waiting for support of version 0.48.1 for Ubuntu
+
+# Custom dircolors setup, for the reason that in WSL all folders being listed by ls command that are inside
+# of a windows mounted drive, display a blue text with a green background, wich is awful to read
+eval "$(dircolors -b ~/.config/dircolors)"
