@@ -33,7 +33,7 @@ $character"""
 orange = "#ffb650"
 
 [character]
-success_symbol = "[❯](bold green)" 
+success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
 
 [package]
@@ -51,10 +51,12 @@ format = "[$symbol ($tfm)]($style)"
 symbol = "🎯"
 
 [directory]
-truncation_length = 3
+truncation_length = 0
 style = "bold white"
-truncation_symbol = "…/"
+truncation_symbol = " …/"
 use_os_path_sep = false
+truncate_to_repo = true
+format = " [$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
