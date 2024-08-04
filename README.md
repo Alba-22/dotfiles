@@ -1,28 +1,51 @@
 # Dotfiles
+
 This repository aims to store my dotfiles configurations with the help of GNU Stow, so I can have a seamless shell experience across multiple machines with different Operational Systems
 
 ## Getting Started
-First of all, you'll need to install the following packages, with the help of your package manager:
+
+First of all, you'll need to setup your SSH key for GitHub, since all `git clone` commands ran for this configuration use the ssh URL.
+
+Fater that, you'll need to install the following packages, with the help of your package manager:
+
 ```shell
+# On Ubuntu
 sudo apt install zsh git stow fzf
+# On MacOS
+brew install zsh git stow fzf
+```
+
+If you're running on Linux, install also [homebrew](https://homebrew.sh):
+
+```shell
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
 After that, you can clone this repository into your home:
+
 ```shell
-git clone git@github.com:Alba-22/dotfiles.git ## Or use HTTPS if you prefer
+git clone git@github.com:Alba-22/dotfiles.git
 ```
 
-Then, go to the `dotfiles` folder and set stow to that folder
+Then, go to the `dotfiles` directory and set stow to that directory
+
 ```shell
 cd dotfiles
 stow .
 ```
 
-Now, get back to your home folder and set your terminal to use zsh as its default shell
+Now, get back to your home directory and set your terminal to use zsh as its default shell
+
 ```shell
-cd ..
 chsh -s $(which zsh)
-source .zshrc
 ```
 
-So, if everything runs as expected, your shell will be good to go, with zinit plugin managers installing everything you'll need :D
+After that check if your terminal emulator did set the zsh as the default shell correctly, by running the following command:
+
+```shell
+echo $0
+# or
+echo $SHELL
+```
+
+Now, restart your terminal emulator and, if everything runs as expected, your shell will be good to go, with zinit plugin managers installing everything you'll need :D
