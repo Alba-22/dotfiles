@@ -87,6 +87,9 @@ alias fetchall="git branch -r | grep -v '\->' | sed \"s,\x1B\[[0-9;]*[a-zA-Z],,g
 ## Android
 #export PATH=$PATH:$ANDROID_HOME/tools/bin
 #export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+## For dircolors to work properly on MacOS
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 ## Other
 export PAGER="less -F"
 

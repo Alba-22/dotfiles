@@ -6,13 +6,13 @@ This repository aims to store my dotfiles configurations with the help of GNU St
 
 First of all, you'll need to setup your SSH key for GitHub, since all `git clone` commands ran for this configuration use the ssh URL.
 
-Fater that, you'll need to install the following packages, with the help of your package manager:
+After that, you'll need to install some packages, depending on your SO:
 
 ```shell
-# On Ubuntu
+# For Linux(Ubuntu based distros)
 sudo apt install zsh git stow fzf
-# On MacOS
-brew install zsh git stow fzf
+# For MacOS
+brew install zsh git stow fzf coreutils
 ```
 
 If you're running on Linux, install also [homebrew](https://homebrew.sh):
