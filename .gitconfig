@@ -1,0 +1,10 @@
+[user]
+	email = alba__22@outlook.com
+	name = Alba
+[core]
+	editor = vim
+[alias]
+	lg = log -20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	st = status -s
+	sta = status
+	cleanlocal = remote prune origin

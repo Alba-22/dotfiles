@@ -68,9 +68,6 @@ export LANG=en_US.UTF-8
 # Aliases
 alias ls="ls -lah --color"
 alias cls="clear"
-alias glg="git log -10 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias fetchall="git branch -r | grep -v '\->' | sed \"s,\x1B\[[0-9;]*[a-zA-Z],,g\" | while read remote; do git branch --track \"${remote#origin/}\" \"$remote\"; done"
-#alias clear-flutter-projects="sh /Users/alba/dev/bioma/flutter-clean-recursivo.sh"
 
 # Path Exports
 ## Flutter
