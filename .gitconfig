@@ -3,8 +3,9 @@
 	name = Alba
 [core]
 	editor = vim
+	pager = less -+$LESS -RS
 [alias]
-	lg = log -20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log -50 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	st = status -s
 	sta = status
 	cleanlocal = remote prune origin
