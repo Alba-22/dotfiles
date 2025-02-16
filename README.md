@@ -10,6 +10,7 @@ After that, you'll need to install some packages, depending on your SO:
 
 ```shell
 # For Linux(Ubuntu based distros)
+sudo apt update
 sudo apt install zsh git stow fzf
 # For MacOS
 brew install zsh git stow fzf coreutils
@@ -37,6 +38,7 @@ stow .
 Now, get back to your home directory and set your terminal to use zsh as its default shell
 
 ```shell
+cd ..
 chsh -s $(which zsh)
 ```
 
