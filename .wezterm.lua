@@ -4,7 +4,7 @@ local config = wezterm.config_builder()
 -- Theme customization
 config.color_scheme = "Tokyo Night"
 config.window_decorations = "RESIZE"
-config.font_size = 20.0
+config.font_size = 13.0
 
 -- Set to use WSL when on windows
 -- local getOS = require("user.getOS")
