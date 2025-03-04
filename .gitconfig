@@ -9,3 +9,29 @@
 	st = status -s
 	sta = status
 	cleanlocal = remote prune origin
+# https://blog.gitbutler.com/how-git-core-devs-configure-git/
+[column]
+        ui = auto
+[branch]
+        sort = -committerdate
+[tag]
+        sort = version:refname
+[init]
+        defaultBranch = main
+[diff]
+        algorithm = histogram
+        colorMoved = plain
+        mnemonicPrefix = true
+        renames = true
+[push]
+        default = simple
+        autoSetupRemote = true
+        followTags = true
+[fetch]
+        prune = true
+        pruneTags = true
+        all = true
+[help]
+        autocorrect = prompt
+[merge]
+        conflictstyle = zdiff3 
