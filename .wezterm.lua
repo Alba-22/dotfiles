@@ -6,6 +6,7 @@ config.color_scheme = "Tokyo Night"
 config.window_decorations = "RESIZE"
 config.font_size = 13.0
 config.window_background_opacity = 0.9
+config.window_close_confirmation = "NeverPrompt"
 
 -- Set to use WSL when on windows
 -- local getOS = require("user.getOS")
