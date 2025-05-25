@@ -11,9 +11,9 @@ After that, you'll need to install some packages, depending on your SO:
 ```shell
 # For Linux(Ubuntu based distros)
 sudo apt update
-sudo apt install zsh git stow fzf
+sudo apt install zsh git stow fzf bat
 # For MacOS
-brew install zsh git stow fzf coreutils
+brew install zsh git stow fzf coreutils bat
 ```
 
 If you're running on Linux, install also [homebrew](https://homebrew.sh):

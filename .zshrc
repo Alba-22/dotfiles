@@ -68,6 +68,7 @@ export LANG=en_US.UTF-8
 # Aliases
 alias ls="ls -lah --color"
 alias cls="clear"
+alias cat="bat"
 
 # Path Exports
 ## Flutter
@@ -102,3 +103,9 @@ fi
 # Custom dircolors setup, for the reason that in WSL all folders being listed by ls command that are inside
 # of a windows mounted drive, display a blue text with a green background, wich is awful to read
 eval "$(dircolors -b ~/.config/dircolors)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+PATH=~/.console-ninja/.bin:$PATH
