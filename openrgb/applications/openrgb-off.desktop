@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=OpenRGB: Off
+Comment=Apply the "off" OpenRGB profile
+Exec=sh -c "\\$HOME/.local/bin/openrgb-set-profile 'off'"
+Icon=openrgb
+Terminal=false
+Categories=Utility;
+X-OpenRGB-Profile=off

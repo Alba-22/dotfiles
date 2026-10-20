@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenRGB headless server (instant profile switching)
+
+[Service]
+Type=simple
+# no display needed: Qt runs offscreen
+Environment=QT_QPA_PLATFORM=offscreen
+ExecStart=%h/.local/bin/openrgb-run --server --noautoconnect --server-port 6743
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Usage: openrgb-set-profile <profile name>
+# Loads an OpenRGB profile (instantly, via the resident headless server) and remembers it, so the
+# login/resume service re-applies the same one later. Falls back to a slow one-shot run (~13 s)
+# if the server is not up yet.
+PROFILE="$1"; [ -n "$PROFILE" ] || { echo "usage: $0 <profile>"; exit 2; }
+BIN="$HOME/.local/bin"
+STATE="${XDG_CONFIG_HOME:-$HOME/.config}/openrgb-current-profile"
+
+notify() {
+    command -v notify-send >/dev/null || return 0
+    # transient: shows the popup but is not kept in the notification list; the sync hint makes a
+    # new OpenRGB notification replace the previous one instead of stacking
+    notify-send -t 2500 -h boolean:transient:true -h string:x-canonical-private-synchronous:openrgb-profile \
+        -i openrgb "OpenRGB" "$1"
+}
+
+# profile must exist (native config dir, or the Flatpak one)
+found=""
+for dir in "${XDG_CONFIG_HOME:-$HOME/.config}/OpenRGB/profiles" "$HOME/.var/app/org.openrgb.OpenRGB/config/OpenRGB/profiles"; do
+    [ -f "$dir/$PROFILE.json" ] && found=1
+done
+[ -n "$found" ] || { notify "No such profile: $PROFILE"; exit 1; }
+
+if "$BIN/openrgb-sdk.py" load "$PROFILE" 4; then                         # fast path
+    echo "$PROFILE" > "$STATE"; notify "Profile applied: $PROFILE"; exit 0
+fi
+
+notify "Server not ready, applying the slow way…"
+if "$BIN/openrgb-run" --noautoconnect --profile "$PROFILE" 2>&1 | grep -q 'Profile loaded successfully'; then
+    echo "$PROFILE" > "$STATE"; notify "Profile applied: $PROFILE"
+else
+    notify "Could not load profile: $PROFILE"; exit 1
+fi

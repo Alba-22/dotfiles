@@ -51,3 +51,13 @@ echo $SHELL
 ```
 
 Now, restart your terminal emulator and, if everything runs as expected, your shell will be good to go, with zinit plugin managers installing everything you'll need :D
+
+## Optional: OpenRGB lighting setup (Linux only)
+
+The [`openrgb/`](openrgb/README.md) folder holds the RGB lighting setup (profiles, one-click colour launchers,
+re-apply on login/resume, systemd units). It is **not** handled by `stow .` (ignored via `.stow-local-ignore`), so
+nothing happens on macOS or on machines without RGB hardware. On a Linux machine where you want it, run it manually:
+
+```shell
+./openrgb/setup.sh
+```

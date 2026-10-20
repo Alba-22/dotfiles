@@ -1,0 +1,20 @@
+# Having this file replaces Stow's built-in ignore list, so the defaults are repeated here.
+RCS
+.+,v
+CVS
+\.\#.+
+\.cvsignore
+\.svn
+_darcs
+\.hg
+\.git
+\.gitignore
+\.gitmodules
+.+~
+\#.*\#
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Not a dotfile package: Linux-only OpenRGB setup, installed manually with ./openrgb/setup.sh
+^/openrgb

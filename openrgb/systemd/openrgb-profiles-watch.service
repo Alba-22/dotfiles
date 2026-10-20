@@ -1,0 +1,6 @@
+[Unit]
+Description=Remind about OpenRGB profiles not committed / without a menu launcher
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/openrgb-profile-reminder

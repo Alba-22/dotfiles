@@ -1,0 +1,13 @@
+[Unit]
+Description=Apply the last-chosen OpenRGB profile at login and after resume from suspend
+Wants=openrgb-server.service
+After=openrgb-server.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/openrgb-apply-profile.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

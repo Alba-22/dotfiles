@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Runs OpenRGB, wherever it is installed. Everything else in this setup calls OpenRGB through this wrapper.
+#
+# Lookup order:
+#   1. $OPENRGB_BIN                     (explicit override)
+#   2. `openrgb` in PATH                (distro package / brew)
+#   3. ~/Applications/OpenRGB*.AppImage (newest version wins)
+#   4. Flatpak org.openrgb.OpenRGB
+#
+# Also applies the fontconfig workaround if it is installed: OpenRGB's Qt GUI crashed (segfault in
+# libfontconfig) with the stock fontconfig rules on the machine this was built on.
+
+fontconf="${XDG_CONFIG_HOME:-$HOME/.config}/openrgb-fontconfig/fonts.conf"
+[ -f "$fontconf" ] && export FONTCONFIG_FILE="$fontconf"
+
+if [ -n "$OPENRGB_BIN" ]; then
+    exec "$OPENRGB_BIN" "$@"
+fi
+
+if bin="$(command -v openrgb 2>/dev/null)"; then
+    exec "$bin" "$@"
+fi
+
+appimage="$(ls -1 "$HOME"/Applications/OpenRGB*.AppImage 2>/dev/null | sort -V | tail -n1)"
+if [ -n "$appimage" ] && [ -x "$appimage" ]; then
+    exec "$appimage" "$@"
+fi
+
+if command -v flatpak >/dev/null 2>&1 && flatpak info org.openrgb.OpenRGB >/dev/null 2>&1; then
+    envargs=()
+    [ -n "$QT_QPA_PLATFORM" ] && envargs+=("--env=QT_QPA_PLATFORM=$QT_QPA_PLATFORM")
+    exec flatpak run "${envargs[@]}" org.openrgb.OpenRGB "$@"
+fi
+
+echo "openrgb-run: OpenRGB not found (no \$OPENRGB_BIN, 'openrgb' in PATH, ~/Applications/OpenRGB*.AppImage or Flatpak)" >&2
+exit 127
