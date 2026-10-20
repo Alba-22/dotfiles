@@ -68,23 +68,15 @@ export LANG=en_US.UTF-8
 # Aliases
 alias ls="ls -lah --color"
 alias cls="clear"
-alias cat="bat"
+alias cat="batcat"
+alias flutter="fvm flutter"
+alias c="code"
 
 # Path Exports
+export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 ## Flutter
-#export FLUTTER_HOME=/Users/alba/fvm/default
-#export JAVA_HOME=$(/usr/libexec/java_home)
-#export ANDROID_HOME=/Users/$USER/Library/Android/sdk
-#export FVM_HOME=/Users/alba/fvm
-#export PATH=$PATH:$FLUTTER_HOME/bin
-#export PATH=$PATH:$FLUTTER_HOME/bin/cache/dart-sdk/bin
-#export PATH=$PATH:$HOME/.pub-cache/bin
-#export PATH=$PATH:$FVM_HOME/
-## Homebew
-#export PATH=$PATH:/opt/homebrew/bin
-## Android
-#export PATH=$PATH:$ANDROID_HOME/tools/bin
-#export PATH=$PATH:$ANDROID_HOME/platform-tools
+export FVM_CACHE_PATH=$HOME/fvm
+export PATH=$PATH:$FVM_CACHE_PATH/bin
 
 ## For dircolors to work properly on MacOS
 export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
@@ -101,7 +93,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
 fi
 
 # Custom dircolors setup, for the reason that in WSL all folders being listed by ls command that are inside
-# of a windows mounted drive, display a blue text with a green background, wich is awful to read
+# of a windows mounted drive, display a blue text with a green background, which is awful to read
 eval "$(dircolors -b ~/.config/dircolors)"
 
 export NVM_DIR="$HOME/.nvm"
@@ -109,3 +101,19 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 PATH=~/.console-ninja/.bin:$PATH
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"
+
+# claude
+export PATH="$HOME/.local/bin:$PATH"
+
+# intellij
+export PATH="$HOME/intellij/bin:$PATH"
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
