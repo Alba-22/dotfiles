@@ -1,0 +1,10 @@
+[Unit]
+Description=Watch OpenRGB profiles for changes not yet in the dotfiles repo
+
+[Path]
+# the profiles folder is a symlink into the dotfiles repo; inotify follows it
+PathChanged=%h/.config/OpenRGB/profiles
+Unit=openrgb-profiles-watch.service
+
+[Install]
+WantedBy=default.target

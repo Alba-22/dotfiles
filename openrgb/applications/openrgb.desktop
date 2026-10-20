@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=OpenRGB
+Comment=Open source RGB lighting control
+Exec=sh -c "\\$HOME/.local/bin/openrgb-run"
+Icon=openrgb
+Terminal=false
+Categories=Utility;

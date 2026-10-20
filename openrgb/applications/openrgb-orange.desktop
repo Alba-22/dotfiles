@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=OpenRGB: Orange
+Comment=Apply the "orange" OpenRGB profile
+Exec=sh -c "\\$HOME/.local/bin/openrgb-set-profile orange"
+Icon=openrgb
+Terminal=false
+Categories=Utility;
+X-OpenRGB-Profile=orange

@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+# Reminder only, changes nothing. Run by openrgb-profiles-watch.path whenever something in the OpenRGB profiles
+# folder changes (e.g. after "Save Profile" in the GUI). If a profile is not committed to the dotfiles repo yet, or
+# has no menu launcher, it shows a notification saying so.
+
+sleep 2                                            # let OpenRGB finish writing
+
+dir="$(readlink -f "${XDG_CONFIG_HOME:-$HOME/.config}/OpenRGB/profiles")"
+repo="$(git -C "$dir" rev-parse --show-toplevel 2>/dev/null)" || exit 0   # profiles not in a git repo: nothing to remind
+apps="$(dirname "$(dirname "$dir")")/applications"                      # <dotfiles>/openrgb/applications
+
+# changed/new/deleted profile files (-z: no quoting of names with spaces)
+uncommitted="$(git -C "$repo" status --porcelain -z -- "$dir" | tr '\0' '\n' \
+    | sed -n 's#^.. .*/\([^/]*\)\.json$#\1#p' | sort -u | paste -sd, - | sed 's/,/, /g')"
+
+missing=()
+for f in "$dir"/*.json; do
+    [ -e "$f" ] || continue
+    name="$(basename "$f" .json)"
+    grep -q -x -F "X-OpenRGB-Profile=$name" "$apps"/*.desktop 2>/dev/null || missing+=("$name")
+done
+
+stale=()                                           # launchers whose profile was deleted
+for f in "$apps"/*.desktop; do
+    [ -e "$f" ] || continue
+    name="$(sed -n 's/^X-OpenRGB-Profile=//p' "$f")"
+    [ -n "$name" ] && [ ! -e "$dir/$name.json" ] && stale+=("$name")
+done
+
+join() { printf '%s, ' "$@" | sed 's/, $//'; }
+msg=""
+add() { [ -n "$msg" ] && msg="$msg"$'\n'; msg="$msg$1"; }
+[ -n "$uncommitted" ] && add "Not committed to dotfiles yet: $uncommitted"
+[ "${#missing[@]}" -gt 0 ] && add "No menu launcher: $(join "${missing[@]}") (run openrgb/setup.sh launchers)"
+[ "${#stale[@]}" -gt 0 ] && add "Launcher for a deleted profile: $(join "${stale[@]}") (run openrgb/setup.sh launchers)"
+[ -n "$msg" ] || exit 0
+
+echo "$msg"
+command -v notify-send >/dev/null || exit 0
+# kept in the notification list on purpose (it is a to-do); the sync hint replaces an older reminder instead of stacking
+notify-send -h string:x-canonical-private-synchronous:openrgb-profile-reminder -i openrgb "OpenRGB profiles" "$msg"
