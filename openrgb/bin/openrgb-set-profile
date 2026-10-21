@@ -7,12 +7,19 @@ PROFILE="$1"; [ -n "$PROFILE" ] || { echo "usage: $0 <profile>"; exit 2; }
 BIN="$HOME/.local/bin"
 STATE="${XDG_CONFIG_HOME:-$HOME/.config}/openrgb-current-profile"
 
+NOTIFY_ID=""
 notify() {
     command -v notify-send >/dev/null || return 0
-    # transient: shows the popup but is not kept in the notification list; the sync hint makes a
-    # new OpenRGB notification replace the previous one instead of stacking
-    notify-send -t 2500 -h boolean:transient:true -h string:x-canonical-private-synchronous:openrgb-profile \
-        -i openrgb "OpenRGB" "$1"
+    # transient: should not be kept in the notification list. Not every desktop honours that, so the
+    # notification is also closed explicitly a few seconds later (below). --replace-id makes a follow-up
+    # message ("applied") replace the previous one ("applying…") instead of stacking.
+    NOTIFY_ID="$(notify-send --print-id ${NOTIFY_ID:+--replace-id="$NOTIFY_ID"} -t 2500 \
+        -h boolean:transient:true -i openrgb "OpenRGB" "$1")"
+    if [ -n "$NOTIFY_ID" ] && command -v busctl >/dev/null; then
+        # detached, so the launcher can exit right away; closing removes it from the notification list
+        setsid sh -c "sleep 5; busctl --user call org.freedesktop.Notifications /org/freedesktop/Notifications \
+            org.freedesktop.Notifications CloseNotification u $NOTIFY_ID" >/dev/null 2>&1 &
+    fi
 }
 
 # profile must exist (native config dir, or the Flatpak one)
